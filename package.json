@@ -1,0 +1,19 @@
+{
+  "name" : "quill-image-url-drop-module",
+  "version" : "1.0.0",
+  "description" : "A module for Quill rich text editor to allow images' URLs to be drag/dropped into the editor.",
+  "repository" : {
+    "type" : "git",
+    "url" : "git://github.com/riencroonenborghs/quill-image-url-drop-module.git"
+  },
+  "keywords" : ["quill", "quilljs", "image", "url", "drag", "drop"],
+  "readmeFilename" : "README.md",
+  "author" : "Rien Croonenborghs",
+  "license": "MIT",
+  "devDependencies" : {
+    "gulp" :  "3.9.0",
+    "gulp-coffee" : "2.3.1",
+    "gulp-util" : "3.0.7",
+    "del" : "2.2.0"
+  }
+}
