@@ -1,6 +1,7 @@
 window.QuillImageUrlDrop = class
   constructor: (@quill, @options) ->
-    document.querySelector("#{@options.container} img").addEventListener "dragstart", @handleDragStart, false    
+    images = document.querySelector("#{@options.container} img")
+    images.addEventListener "dragstart", @handleDragStart, false if images
     @quill.root.addEventListener "drop", ((event)=>@handleDrop(event)), false
   handleDragStart: (event) ->
     url = event.target.attributes['data-url'].nodeValue

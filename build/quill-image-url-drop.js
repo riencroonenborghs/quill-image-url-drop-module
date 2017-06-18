@@ -1,8 +1,12 @@
 window.QuillImageUrlDrop = (function() {
   function _Class(quill, options) {
+    var images;
     this.quill = quill;
     this.options = options;
-    document.querySelector(this.options.container + " img").addEventListener("dragstart", this.handleDragStart, false);
+    images = document.querySelector(this.options.container + " img");
+    if (images) {
+      images.addEventListener("dragstart", this.handleDragStart, false);
+    }
     this.quill.root.addEventListener("drop", ((function(_this) {
       return function(event) {
         return _this.handleDrop(event);
