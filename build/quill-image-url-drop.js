@@ -1,18 +1,37 @@
 window.QuillImageUrlDrop = (function() {
   function _Class(quill, options) {
-    var images;
     this.quill = quill;
     this.options = options;
-    images = document.querySelector(this.options.container + " img");
-    if (images) {
-      images.addEventListener("dragstart", this.handleDragStart, false);
-    }
+    this.observeDOM((function(_this) {
+      return function() {
+        var images;
+        images = document.querySelector(_this.options.container + " img");
+        if (images) {
+          return images.addEventListener("dragstart", _this.handleDragStart, false);
+        }
+      };
+    })(this));
     this.quill.root.addEventListener("drop", ((function(_this) {
       return function(event) {
         return _this.handleDrop(event);
       };
     })(this)), false);
   }
+
+  _Class.prototype.observeDOM = function(callback) {
+    var config, observer, target;
+    target = document.querySelector("body");
+    observer = new MutationObserver(function(mutations) {
+      if (mutations.length > 0) {
+        return callback();
+      }
+    });
+    config = {
+      childList: true,
+      subtree: true
+    };
+    return observer.observe(target, config);
+  };
 
   _Class.prototype.handleDragStart = function(event) {
     var url;

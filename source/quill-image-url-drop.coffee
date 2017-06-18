@@ -1,8 +1,18 @@
 window.QuillImageUrlDrop = class
   constructor: (@quill, @options) ->
-    images = document.querySelector("#{@options.container} img")
-    images.addEventListener "dragstart", @handleDragStart, false if images
+    @observeDOM =>
+      images = document.querySelector("#{@options.container} img")
+      images.addEventListener "dragstart", @handleDragStart, false if images
     @quill.root.addEventListener "drop", ((event)=>@handleDrop(event)), false
+
+  observeDOM: (callback) ->
+    target = document.querySelector "body"
+    observer = new MutationObserver (mutations) ->
+      if mutations.length > 0
+        callback()
+    config = { childList: true, subtree: true }
+    observer.observe target, config
+
   handleDragStart: (event) ->
     url = event.target.attributes['data-url'].nodeValue
     event.dataTransfer.setData "QuillImageUrlDrop.imageUrl", url
